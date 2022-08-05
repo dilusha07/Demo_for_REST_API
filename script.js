@@ -75,6 +75,23 @@ app.put(`/api/customers/:id`, (req, res) => {
   res.send(customer);
 });
 
+//Delete Request Handler
+//Delete customer details
+app.delete(`/api/customers/:id`, (req, res) => {
+  const customer = customers.find((c) => c.id === parseInt(req.params.id));
+  if (!customer)
+    res
+      .status(404)
+      .send(
+        '<h2 style="font-family: Malgun Gothic; color:darked;">Not Found!</h2>'
+      );
+
+  const index = customers.indexOf(customer);
+  customers.splice(index, 1);
+
+  res.send(customer);
+});
+
 //Validation Information
 function validateCustomer(customer) {
   const schema = {
