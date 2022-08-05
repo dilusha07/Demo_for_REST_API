@@ -13,6 +13,12 @@ const customers = [
   { title: "Ravi", id: 5 },
 ];
 
+//Read Request Handlers
+//Display the message when the URL consists of '/'
+app.get(`/`, (req, res) => {
+  res.send("Welcome to REST API!");
+});
+
 //PORT environment variable
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
