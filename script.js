@@ -54,6 +54,27 @@ app.post(`/api/customers`, (req, res) => {
   res.send(customer);
 });
 
+//Update Requesrt Handler
+//Update Existing Customer information
+app.put(`/api/customers/:id`, (req, res) => {
+  const customer = customers.find((c) => c.id === parseInt(req.params.id));
+  if (!customer)
+    res
+      .status(404)
+      .send(
+        '<h2 style="font-family:Malgun Gothic; color:darked;">Not FOund!</h2>'
+      );
+
+  const { error } = validateCustomer(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
+
+  customer.title = req.body.title;
+  res.send(customer);
+});
+
 //Validation Information
 function validateCustomer(customer) {
   const schema = {
