@@ -24,6 +24,19 @@ app.get(`/api/customers`, (req, res) => {
   res.send(customers);
 });
 
+//Display the Information of specific customer when you mentioned the id
+app.get(`/api/customers/:id`, (req, res) => {
+  const customer = customers.find((c) => c.id === parseInt(req.params.id));
+  //if there is no valid customer ID , then display an error with the following
+  if (!customer)
+    res
+      .status(404)
+      .send(
+        `<h2 style="font-family:Malgun Gothic; color:darked; ">Ooops... Cant find what you are looking for!</h2>`
+      );
+  res.send(customer);
+});
+
 //PORT environment variable
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
