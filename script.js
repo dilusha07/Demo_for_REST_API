@@ -19,6 +19,11 @@ app.get(`/`, (req, res) => {
   res.send("Welcome to REST API!");
 });
 
+//Display the list of customers when URL consists of api customers
+app.get(`/api/customers`, (req, res) => {
+  res.send(customers);
+});
+
 //PORT environment variable
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
